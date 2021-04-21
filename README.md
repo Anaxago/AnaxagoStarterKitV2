@@ -1,5 +1,5 @@
 # Outils
-* [Symfony5](https://symfony.com/4)
+* [Symfony5](https://symfony.com/5)
 
 # Pour commencer
 
