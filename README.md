@@ -13,7 +13,7 @@ Pour lancer le projet vous aurez besoin de
   
 # Lancer le projet
 
-#### :warning: Créer son fichier .env.local a partir des informations manquantes Sinon la commande suivante ne pourra fonctionner!
+#### :warning: Créer son fichier .env.local à partir des informations manquantes, sinon la commande suivante ne pourra pas fonctionner!
 
 ```
 make start-project
