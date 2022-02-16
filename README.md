@@ -24,4 +24,4 @@ Cette commande va se charger de créer un vhost starter.anaxago.local.com, de ch
 make start-project
 ```
 
-* N'importe quel outil que vous l'habitude d'utilier : MAMP, WAMP, Docker, Symfony CLI
+* N'importe quel outil que vous l'habitude d'utiliser : MAMP, WAMP, Docker, Symfony CLI
