@@ -12,7 +12,9 @@
                     <div class="card">
                         <img class="card-img-top" src="https://picsum.photos/360/240/?random" alt="project">
                         <div class="card-body">
-                            <h5>{{ project.title }}</h5>
+                            <h5>
+                                <a href="{{ path('anaxago_project_page', {id: project.id}) }}">{{ project.title }}</a>
+                            </h5>
                             <p class="card-text">
                                 {{ project.description }}
                             </p>
