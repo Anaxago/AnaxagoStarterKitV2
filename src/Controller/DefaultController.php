@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -26,6 +27,47 @@ class DefaultController extends AbstractController
         $projects = $entityManager->getRepository(Project::class)->findAll();
 
         return $this->render('Default/index.html.twig', ['projects' => $projects]);
+    }
+    /**
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return Response
+     */
+    public function stats(EntityManagerInterface $entityManager): Response
+    {
+        $users = $entityManager->getRepository(User::class)->findAll();
+        $projects = $entityManager->getRepository(Project::class)->findAll();
+
+        $accessLogs = file_get_contents('/var/log/apache2/anaxago-starter/access.log');
+        $accessStats = [];
+        foreach (explode("\n", $accessLogs) as $accessLog) {
+            if (!$accessLog) {
+                continue;
+            }
+            $data = explode(' ', $accessLog)[3];
+            $start = null;
+            $end = null;
+            foreach(str_split($data) as $index => $char) {
+                if ($char === '/') {
+                    if ($start !== null) {
+                        $end = $index;
+                    }
+                    if ($start === null) {
+                        $start = $index;
+                    }
+                }
+            }
+            $start -=- 1;
+            $data = substr($data, $start, $end-$start);
+            if (in_array($data, array_keys($accessStats))) {
+                $accessStats[$data] = ++$accessStats[$data];
+            } else {
+                $accessStats[$data] = 1;
+            }
+        }
+        dump($accessStats);
+
+        return $this->render('Default/stats.html.twig', ['users' => count($users), 'projects' => $projects, 'accessStats' => $accessStats]);
     }
 
     /**

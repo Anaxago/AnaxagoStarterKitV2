@@ -2,6 +2,10 @@ anaxago_starter_homepage:
     path:     /
     controller: App\Controller\DefaultController::index
 
+anaxago_stats:
+    path:     /statistics
+    controller: App\Controller\DefaultController::stats
+
 anaxago_project_page:
     path: /projects/{id}
     controller: App\Controller\DefaultController::project

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <h1 class="my-5">Statistiques</h1>
+            {% set projectCount = 0 %}
+            {% for project in projects %}
+                {% set projectCount = projectCount + 1 %}
+            {% endfor %}
+            <ul>
+                <li><strong>Projets sur la plateforme :</strong>{{ projectCount }}</li>
+                <li><strong>Investisseurs sur la plateforme :</strong>{{ users }}</li>
+                {% if accessStats['now' |date('M') | capitalize] is defined %}
+                    <li><strong>Pages vues ce mois ci :</strong>{{ accessStats['now' |date('M') | capitalize] }}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}
