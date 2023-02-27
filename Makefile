@@ -14,7 +14,7 @@ help: ## help : Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
 # Configuration Build ————————————————————————————————————————————————————————————————
-start-project: ## Create private.key public.key with passphrase
+start-project:
 	$(SUDO) ./add-host.sh 127.0.0.1 starter.anaxago.local.com
 	@echo -e "Host starter.anaxago.local.com ajouté"
 	cat vhost-anaxago.conf.dist | sed -e "s+DOCUMENT_ROOT+$(ROOT_DOCUMENT)+" >> vhost-anaxago.conf
@@ -32,9 +32,9 @@ start-project: ## Create private.key public.key with passphrase
 	php bin/console doc:fix:load
 	@echo -e "Rendez-vous sur http://starter.anaxago.local.com "
 
-clean-starter-project: ## Create private.key public.key with passphrase
+clean-starter-project:
 	@echo -e "Suppression du host Anaxago Starter"
 	$(SUDO) ./remove-host.sh starter.anaxago.local.com
 	$(SUDO) rm -rf /etc/apache2/sites-enabled/starter-anaxago.conf
 	$(SUDO) systemctl restart apache2.service
-	@echo -e "Anaxago Starter n'éxiste plus à bientot !!"
+	@echo -e "Anaxago Starter n'existe plus à bientot !!"
